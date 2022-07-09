@@ -79,7 +79,7 @@ module.exports = class DailyReadings {
                     $ = cheerio.load(element);
                     result.readingTitle = $('.content-header h3').text().trim();
                     result.readingAddress = $('.content-header .address a').text();
-                    result.readingBody = $('.content-body p span span').text() || $('.content-body').text();
+                    result.readingBody = $('.content-body p span span').find("br").replaceWith("\n").end().text() || $('.content-body').find("br").replaceWith("\n").end().text();
                     result.readingSource = $('.content-header .address a').attr('href');
                     if (result.readingAddress !== '' && result.readingTitle !== '' && result.readingBody !== '' && result.readingAddress !== '') {
                         readings.push(result);
